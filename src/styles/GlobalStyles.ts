@@ -11,6 +11,7 @@ export default createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         height: 100vh;
         overflow-x: hidden;
+        background-color: #f5f5f5;
     }
    
      *, button, input {
