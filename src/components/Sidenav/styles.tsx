@@ -16,13 +16,20 @@ export const SideNavContainer = styled.div`
         align-items: left;
         justify-content: center;
         gap: 1.5rem;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        cursor: pointer;
 
         div {
             display: flex;
-            align-items: center;;
+            align-items: center;
             gap: 0.5rem;
+            border-radius: 5px;
             color: ${props => props.theme.text.secondary};
+            transition: all 0.2s ease-in-out;
+            
+            &:hover {
+                background-color: ${props => props.theme.colors.secondary};
+            }
             
             a {
                 text-decoration: none;

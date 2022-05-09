@@ -1,10 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import { Dashboard } from "../pages/Dashboard";
+import { AppContainer } from "../components/AppContainer";
+import { List } from "../pages/list";
+import { New } from "../pages/new";
+import { Home } from "../pages/home";
 
 export function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Dashboard />} />
-        </Routes>
+        <AppContainer>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/new" element={<New />} />
+                <Route path="/list/:type" element={<List />} />
+            </Routes>
+        </AppContainer>
     );
 }

@@ -1,10 +1,12 @@
-import { LoginComponent } from "../../components/LoginComponent"
 
-export function Login() {
+import { LoginComponent } from "../../components/LoginComponent"
+import { LoginContainer } from "./styles"
+
+export function Login(props: any) {
     return (
-        <div>
-            <h1>Login page</h1>
+        <LoginContainer>
+            <h1>LOGIN</h1>
             <LoginComponent/>
-        </div>
+        </LoginContainer>
     )
 }

@@ -8,6 +8,7 @@ export default {
         background: '#1B1F38',
         accent: '#4E41F0',
         warn: '#E44C4E',
+        yellow: '#F7931B',
     },
 
     text: {

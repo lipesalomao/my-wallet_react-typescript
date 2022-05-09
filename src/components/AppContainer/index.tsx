@@ -7,7 +7,7 @@ import { SideNav } from "../Sidenav";
 import { ContentContainer } from "./styles";
 import { usePersistedTheme } from "../../hooks/usePersistedTheme";
 
-export function AppContainer() {
+export function AppContainer(props: any) {
     const [theme, setTheme] = usePersistedTheme<DefaultTheme>("theme", dark);
 
     const toggleTheme = () => {
@@ -20,7 +20,9 @@ export function AppContainer() {
                 <SideNav />
                 <div className="contentColumn">
                     <Header toggleTheme={toggleTheme} />
-                    <Content />
+                    <Content>
+                        {props.children}
+                    </Content>
                 </div>
             </ContentContainer>
         </ThemeProvider>

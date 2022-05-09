@@ -10,6 +10,7 @@ declare module 'styled-components' {
             background: string,
             accent: string,
             warn: string,
+            yellow: string,
         },
     
         text: {
