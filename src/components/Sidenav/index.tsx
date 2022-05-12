@@ -32,11 +32,11 @@ function handleLogout () {
                 </div>
                 <div>
                     <MdArrowUpward />
-                    <a href="/list/deposits">Entradas</a>
+                    <a href="/in">Entradas</a>
                 </div>
                 <div>
                     <MdArrowDownward />
-                    <a href="/list/withdraws">Saídas</a>
+                    <a href="/out">Saídas</a>
                 </div>
                 <div>
                     <MdOutlineExitToApp />

@@ -1,0 +1,40 @@
+{
+  "transactions": [
+    {
+      "title": "Salário",
+      "type": "entrada",
+      "frequency": "recorrente",
+      "date": "2022-12-31",
+      "value": "2000,00",
+      "description": "Salário Directon",
+      "id": "nUsQ-uW"
+    },
+    {
+      "title": "Freela Website",
+      "type": "entrada",
+      "frequency": "eventual",
+      "date": "2022-05-10",
+      "value": 2000,
+      "description": "Freela de website para advogado",
+      "id": "5aN4sJN"
+    },
+    {
+      "title": "Venda notebook",
+      "type": "entrada",
+      "frequency": "eventual",
+      "date": "2022-05-11",
+      "value": 1500,
+      "description": "Vendido notebook da sony",
+      "id": "IcTqlJt"
+    },
+    {
+      "title": "Aluguel",
+      "type": "saida",
+      "frequency": "recorrente",
+      "date": "2022-05-10",
+      "value": 800,
+      "description": "Aluguel",
+      "id": "jttKGg_"
+    }
+  ]
+}
