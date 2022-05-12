@@ -28,6 +28,7 @@ export function List(props: any) {
                         <div className="rowContentContainer">
                             <div
                                 className="colorType"
+                                transactionType={row.type}
                                 style={
                                     row.frequency === "eventual"
                                         ? { backgroundColor: `${colors.warn}` }
