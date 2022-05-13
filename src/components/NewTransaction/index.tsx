@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewTransactionContainer } from "./styles";
-import { newTransaction } from "../../services/global-service";
+import {
+    deleteTransaction,
+    getTransactionById,
+    newTransaction,
+    updateTransaction,
+} from "../../services/global-service";
 import { ITransactionModel } from "../../models/TransactionModel";
-
+import { useParams } from "react-router-dom";
 
 export function NewTransaction() {
-        
+    const location = useParams();
+
+    useEffect(() => {
+        location.id ? populateForm(location.id) : null;
+    }, []);
+
+    const populateForm = (id: string | null) => {
+        getTransactionById(id).then((res: ITransactionModel) => {
+            setTitle(res.title);
+            setType(res.type);
+            setFrequency(res.frequency);
+            setValue(res.value);
+            setDate(res.date);
+            setDescription(res.description ? res.description : "");
+        });
+    };
+
     const [title, setTitle] = useState("");
     const [type, setType] = useState("entrada");
     const [frequency, setFrequency] = useState("recorrente");
@@ -13,22 +34,16 @@ export function NewTransaction() {
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState("");
 
-    function handleSubmit(
-        title: string,
-        type: string,
-        frequency: string,
-        date: string,
-        value: number,
-        description: string
-    ) {
-        const data: ITransactionModel = {
-            title: title,
-            type: type,
-            frequency: frequency,
-            date: date,
-            value: value,
-            description: description,
-        };
+    const data: ITransactionModel = {
+        user_id: "ABC123", //TODO: get user id from local storage
+        title: title,
+        type: type,
+        frequency: frequency,
+        date: date,
+        value: value,
+        description: description,
+    };
+    function handleSubmit() {
         setTitle("");
         setType("entrada");
         setFrequency("recorrente");
@@ -36,7 +51,27 @@ export function NewTransaction() {
         setValue(0);
         setDescription("");
 
-        newTransaction(data);
+        if (location.id) {
+            updateTransaction(location.id, data);
+        } else {
+            newTransaction(data);
+        }
+
+        redirect();
+    }
+
+    function deleteTransactionHandler() {
+        deleteTransaction(location.id!);
+
+        redirect();
+    }
+
+    function redirect() {
+        if (type === "entrada") {
+            window.location.href = "/in";
+        } else {
+            window.location.href = "/out";
+        }
     }
 
     return (
@@ -116,22 +151,22 @@ export function NewTransaction() {
                 </div>
 
                 <div className="actionsContainer">
-                    <a>Excluir</a>
+                    <button
+                        disabled={!location.id}
+                        onClick={() => deleteTransactionHandler()}
+                    >
+                        Excluir
+                    </button>
                     <div>
-                        <button onClick={()=> window.location.href = '/'}>Voltar</button>
+                        <button onClick={() => (window.location.href = "/")}>
+                            Voltar
+                        </button>
                         <button
-                            onClick={(event) =>
-                                handleSubmit(
-                                    title,
-                                    type,
-                                    frequency,
-                                    date,
-                                    value,
-                                    description
-                                )
-                            }
+                            onClick={() => {
+                                handleSubmit();
+                            }}
                         >
-                            Cadastrar
+                            {location.id ? "Atualizar" : "Cadastrar"} {/* TODO: enable only if required fields are filled */}
                         </button>
                     </div>
                 </div>

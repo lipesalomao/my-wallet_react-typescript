@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { ITransactionModel } from "../../models/TransactionModel";
 import { getTransactions } from "../../services/global-service";
+import { Row } from "../Row";
 import { ListContainer } from "./styles";
 
 export function List(props: any) {
@@ -20,30 +21,19 @@ export function List(props: any) {
     }
 
     function populateList() {
-        console.log(rows);
         if (rows.length > 0) {
-            return rows.map((row) => {
+            return rows.map((row: ITransactionModel) => {
                 return (
-                    <li key={row.id} className="row">
-                        <div className="rowContentContainer">
-                            <div
-                                className="colorType"
-                                transactionType={row.type}
-                                style={
-                                    row.frequency === "eventual"
-                                        ? { backgroundColor: `${colors.warn}` }
-                                        : {}
-                                }
-                            ></div>
-                            <div className="rowTextContainer">
-                                <span className="rowTitle">{row.title}</span>
-                                <span className="rowType">
-                                    {row.type} {row.frequency}
-                                </span>
-                            </div>
-                        </div>
-                        <span className="rowValue">R$ {row.value}</span>
-                    </li>
+                    <Row key={row.id}
+                        userId={row.user_id}
+                        id={row.id}
+                        title={row.title}
+                        type={row.type}
+                        frequency={row.frequency}
+                        value={row.value}
+                        onClick={() => {console.log("clicked")}}
+                     />
+                    
                 );
             });
         } else {

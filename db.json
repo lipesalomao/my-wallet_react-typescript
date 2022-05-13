@@ -1,15 +1,7 @@
 {
   "transactions": [
     {
-      "title": "Salário",
-      "type": "entrada",
-      "frequency": "recorrente",
-      "date": "2022-12-31",
-      "value": "2000,00",
-      "description": "Salário Directon",
-      "id": "nUsQ-uW"
-    },
-    {
+      "user_id": "ABC123",
       "title": "Freela Website",
       "type": "entrada",
       "frequency": "eventual",
@@ -19,6 +11,7 @@
       "id": "5aN4sJN"
     },
     {
+      "user_id": "ABC123",
       "title": "Venda notebook",
       "type": "entrada",
       "frequency": "eventual",
@@ -28,6 +21,7 @@
       "id": "IcTqlJt"
     },
     {
+      "user_id": "ABC123",
       "title": "Aluguel",
       "type": "saída",
       "frequency": "recorrente",
@@ -35,6 +29,46 @@
       "value": 800,
       "description": "Aluguel",
       "id": "jttKGg_"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Teste",
+      "type": "entrada",
+      "frequency": "eventual",
+      "date": "2022-12-31",
+      "value": 5000,
+      "description": "description test",
+      "id": "AptZB2T"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Teste02",
+      "type": "saída",
+      "frequency": "eventual",
+      "date": "2022-12-31",
+      "value": 500,
+      "description": "Teste 02 ",
+      "id": "hoWA8I5"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Salário",
+      "type": "entrada",
+      "frequency": "recorrente",
+      "date": "2022-12-31",
+      "value": "2000",
+      "description": "Salário Directon 3",
+      "id": "d8qXm29"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Compra Tablet Samsung",
+      "type": "saída",
+      "frequency": "eventual",
+      "date": "2022-10-28",
+      "value": 15000,
+      "description": "Compra tablet samsung s6 lite",
+      "id": "CYxiQzY"
     }
   ]
 }

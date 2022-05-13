@@ -31,11 +31,11 @@ function handleLogout () {
                     <a href="/new">Novo Registro</a>
                 </div>
                 <div>
-                    <MdArrowUpward />
+                    <MdArrowDownward />
                     <a href="/in">Entradas</a>
                 </div>
                 <div>
-                    <MdArrowDownward />
+                    <MdArrowUpward />
                     <a href="/out">Saídas</a>
                 </div>
                 <div>

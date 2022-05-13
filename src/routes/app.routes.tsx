@@ -11,6 +11,7 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/new" element={<New />} />
+                <Route path="/new/:id" element={<New />} />
                 <Route path="/in" element={<In />} />
                 <Route path="/out" element={<Out />} />
             </Routes>

@@ -76,8 +76,9 @@ export const NewTransactionContainer = styled.div`
             flex-direction: row;
             justify-content: space-between;
 
-            a {
+            button:first-child {
                 font-size: 0.8rem;
+                background: none;
                 color: ${({ theme }) => theme.colors.warn};
                 cursor: pointer;
             }
