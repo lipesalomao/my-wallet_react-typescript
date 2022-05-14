@@ -21,7 +21,10 @@ export const RowContainer = styled.li<IRowContainerProps>`
         .colorType {
             width: 12px;
             height: 30px;
-            background-color: ${(props)=> props.frequency === "recorrente" ? ({ theme }) => theme.colors.accent : ({ theme }) => theme.colors.warn};
+            background-color: ${(props) =>
+                props.frequency === "recorrente"
+                    ? ({ theme }) => theme.colors.accent
+                    : ({ theme }) => theme.colors.warn};
         }
         .rowTextContainer {
             display: flex;
@@ -46,6 +49,4 @@ export const RowContainer = styled.li<IRowContainerProps>`
     }
 `;
 
-export const FrequencyColor = styled.div`
-
-`
+export const FrequencyColor = styled.div``;

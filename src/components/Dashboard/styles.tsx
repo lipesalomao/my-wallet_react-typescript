@@ -13,7 +13,7 @@ export const DashboardContainer = styled.div`
         justify-content: space-between;
         color: ${({ theme }) => theme.text.primary};
 
-        div:first-child{
+        div:first-child {
             display: flex;
             flex-direction: column;
             gap: 0;
@@ -29,7 +29,7 @@ export const DashboardContainer = styled.div`
         div {
             display: flex;
             gap: 1.5rem;
-            
+
             select {
                 border-radius: 5px;
                 min-width: 7rem;
@@ -43,7 +43,6 @@ export const DashboardContainer = styled.div`
         min-height: 160px;
         justify-content: space-between;
         gap: 1.5rem;
-        
 
         div {
             width: 50%;
@@ -54,7 +53,7 @@ export const DashboardContainer = styled.div`
             justify-content: space-between;
             flex-direction: column;
             font-size: 0.8rem;
-            
+
             div {
                 padding: 0;
                 font-size: 1rem;
@@ -64,24 +63,25 @@ export const DashboardContainer = styled.div`
                     font-weight: bold;
                 }
             }
+            .value-container {
+                width: 100%;
+            }
         }
         .balaceCard {
             background-color: ${(props) => props.theme.colors.accent};
-            background-image: url(${usdImg}); 
+            background-image: url(${usdImg});
             background-repeat: no-repeat;
             background-position: right center;
-            
-            
         }
         .incomesCard {
             background: ${(props) => props.theme.colors.yellow};
-            background-image: url(${arroUpImg}); 
+            background-image: url(${arroUpImg});
             background-repeat: no-repeat;
             background-position: right center;
         }
         .withdrawsCard {
             background: ${(props) => props.theme.colors.warn};
-            background-image: url(${arrowDownImg}); 
+            background-image: url(${arrowDownImg});
             background-repeat: no-repeat;
             background-position: right center;
         }

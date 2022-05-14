@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     * {
@@ -15,13 +15,20 @@ export default createGlobalStyle`
         overflow-x: hidden;
         
     }
-   
-     *, button, input {
+    button {
+        cursor: pointer;
+
+    } 
+    
+    *, button, input {
         border: 0;
         outline: 0;        
         font-family: "Roboto", Helvetica, Arial, sans-serif;
+        
+        
     }
-    button, input {
-        cursor: pointer;
-    } 
+    [disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 `;

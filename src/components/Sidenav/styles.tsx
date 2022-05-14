@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const SideNavContainer = styled.div`
     display: flex;
-    width: 310px;
+    width: 20%;
+    min-width: 220px;
     padding: 1rem;
     flex-direction: column;
     align-items: center;

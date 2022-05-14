@@ -8,6 +8,7 @@ import {
 } from "../../services/global-service";
 import { ITransactionModel } from "../../models/TransactionModel";
 import { useParams } from "react-router-dom";
+import DatePicker from 'react-datepicker'
 
 export function NewTransaction() {
     const location = useParams();
@@ -30,12 +31,12 @@ export function NewTransaction() {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("entrada");
     const [frequency, setFrequency] = useState("recorrente");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState<string>('');
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState("");
 
     const data: ITransactionModel = {
-        user_id: "ABC123", //TODO: get user id from local storage
+        user_id: "ABC123", //TODO: get user id from local storagea
         title: title,
         type: type,
         frequency: frequency,
@@ -47,7 +48,7 @@ export function NewTransaction() {
         setTitle("");
         setType("entrada");
         setFrequency("recorrente");
-        setDate("");
+        setDate('');
         setValue(0);
         setDescription("");
 
@@ -117,6 +118,7 @@ export function NewTransaction() {
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
                         />
+                        {/* <DatePicker selected={date} onChange={date => date? setDate(date): setDate(new Date())}/> */}
                     </div>
                     <div>
                         <span>Frequência</span>
@@ -151,12 +153,13 @@ export function NewTransaction() {
                 </div>
 
                 <div className="actionsContainer">
-                    <button
-                        disabled={!location.id}
-                        onClick={() => deleteTransactionHandler()}
-                    >
-                        Excluir
-                    </button>
+                    {location.id ? (
+                        <button onClick={() => deleteTransactionHandler()}>
+                            Excluir
+                        </button>
+                    ) : (
+                        <div></div>
+                    )}
                     <div>
                         <button onClick={() => (window.location.href = "/")}>
                             Voltar
@@ -166,7 +169,8 @@ export function NewTransaction() {
                                 handleSubmit();
                             }}
                         >
-                            {location.id ? "Atualizar" : "Cadastrar"} {/* TODO: enable only if required fields are filled */}
+                            {location.id ? "Atualizar" : "Cadastrar"}{" "}
+                            {/* TODO: enable only if required fields are filled */}
                         </button>
                     </div>
                 </div>

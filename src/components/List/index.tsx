@@ -1,21 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { ITransactionModel } from "../../models/TransactionModel";
-import { getTransactions } from "../../services/global-service";
+import { getTransactionsByType } from "../../services/global-service";
 import { Row } from "../Row";
 import { ListContainer } from "./styles";
 
 export function List(props: any) {
     const actualYear = new Date().getFullYear();
 
-    const { colors, text } = useContext(ThemeContext);
+    const { text } = useContext(ThemeContext);
 
     const [year, setYear] = useState<number>(new Date().getFullYear());
     const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
     const [rows, setRows] = useState<ITransactionModel[]>([]);
 
-    async function getData() {
-        await getTransactions(year, month, props.type).then((res: any) => {
+    async function getTransactionByType() {
+        await getTransactionsByType(year, month, props.type).then((res: any) => {
             setRows(res);
         });
     }
@@ -31,7 +31,6 @@ export function List(props: any) {
                         type={row.type}
                         frequency={row.frequency}
                         value={row.value}
-                        onClick={() => {console.log("clicked")}}
                      />
                     
                 );
@@ -47,7 +46,7 @@ export function List(props: any) {
                     }}
                 >
                     <h3 style={{ opacity: "0.4" }}>
-                        Você ainda não fez nenhuma movimentação.
+                        Sem dados para exibir.
                     </h3>
                 </div>
             );
@@ -55,7 +54,7 @@ export function List(props: any) {
     }
 
     useEffect(() => {
-        getData().then(() => {
+        getTransactionByType().then(() => {
             populateList();
         });
     }, [year, month]);

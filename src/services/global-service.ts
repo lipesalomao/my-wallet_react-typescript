@@ -2,6 +2,7 @@ import { ITransactionModel } from "./../models/TransactionModel";
 import axios from "axios";
 
 const user_id = "ABC123";
+//TODO SET USER ID ON ALL REQUESTS
 
 export async function newTransaction(data: ITransactionModel) {
     const response = await axios
@@ -15,13 +16,20 @@ export async function newTransaction(data: ITransactionModel) {
     return response;
 }
 
-export async function getTransactions(
+export async function getTransactionsByType(
     year: number,
     month: number,
     type: string
 ) {
     const response = await axios.get(
         `http://localhost:3333/transactions?type=${type}&user_id=${user_id}`
+    );
+    return response.data;
+}
+
+export async function getTAllTransactions(year: number, month: number) {
+    const response = await axios.get(
+        `http://localhost:3333/transactions?user_id=${user_id}`
     );
     return response.data;
 }
