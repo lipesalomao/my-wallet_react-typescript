@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const NewTransactionContainer = styled.div`
     display: flex;
@@ -52,11 +53,17 @@ export const NewTransactionContainer = styled.div`
             flex-direction: row;
             gap: 1.5rem;
 
-            div {
-                
+            .type, .frequency, .date, .value {               
                 display: flex;
                 flex-direction: column;
-                width: 25%;
+                width: 100%;
+
+            }
+            .date {
+                width: 100%;
+                .datePicker{
+                    width: 100%;
+                }
             }
         }
 

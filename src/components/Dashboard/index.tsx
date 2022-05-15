@@ -10,8 +10,8 @@ export function Dashboard() {
     const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
     const [totalIncomes, setTotalIncomes] = useState<number>(0);
     const [totalExpenses, setTotalExpenses] = useState<number>(0);
-    const [lastIncomeDate, setLastIncomeDate] = useState<number>(0);
-    const [lastExpenseDate, setLastExpenseDate] = useState<number>(0);
+    const [lastIncomeDate, setLastIncomeDate] = useState<string>("");
+    const [lastExpenseDate, setLastExpenseDate] = useState<string>("");
 
     async function getFullData() {
         await getTAllTransactions(year, month).then(
@@ -25,13 +25,12 @@ export function Dashboard() {
         let incomes: any = [];
         let expenses: any = [];
 
-        let lastIncome: number = 0;
-        let lastExpense: number = 0;
-
-        let dateSort = data.sort((a: ITransactionModel, b: ITransactionModel) => {
-            return +a.date - +b.date;
+        const incomesSort = data.sort((a: ITransactionModel, b: ITransactionModel) => {
+            return a.date < b.date ? 1 : -1;
         });
-        console.warn(dateSort);
+        const expensesSort = data.sort((a: ITransactionModel, b: ITransactionModel) => {
+            return a.date < b.date ? 1 : -1;
+        });
 
         data.map((item: ITransactionModel) => {
             if (item.type === "entrada") {
@@ -40,9 +39,13 @@ export function Dashboard() {
                 expenses.push(item.value);
             }
         });
+
         setTotalIncomes(incomes.reduce((a: number, b: number) => a + b, 0));
         setTotalExpenses(expenses.reduce((a: number, b: number) => a + b, 0));
+
         
+        setLastIncomeDate(new Date(incomesSort[0].date).toLocaleDateString());
+        setLastExpenseDate(new Date(expensesSort[0].date).toLocaleDateString());
     }
 
     useEffect(() => {
@@ -152,7 +155,7 @@ export function Dashboard() {
                             )}
                         </CountUp>
                     </div>
-                    <span>última movimentação em 01/05/2022</span>
+                    <span>última movimentação em {lastExpenseDate}</span>
                 </div>
             </div>
             <div className="secondCardsContainer">

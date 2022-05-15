@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HeaderContainer } from "./styles";
 import { ThemeContext } from "styled-components";
 import Switch from "react-switch";
@@ -10,6 +10,11 @@ interface IHeaderProps {
 }
 
 export function Header(props: IHeaderProps) {
+    useEffect(() => {
+        setUserData(JSON.parse(sessionStorage.getItem("token")?? "")[0]);
+    }, []);
+
+    const [userData, setUserData] = useState<any>({})
     const { colors, title } = useContext(ThemeContext);
 
     return (
@@ -32,7 +37,7 @@ export function Header(props: IHeaderProps) {
             </div>
             <div>
                 <h2>Olá,</h2>
-                <span>Fulano de tal</span>
+                <span>{userData ? userData.name : ''}</span>
             </div>
         </HeaderContainer>
     );

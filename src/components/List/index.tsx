@@ -22,6 +22,9 @@ export function List(props: any) {
 
     function populateList() {
         if (rows.length > 0) {
+            rows.sort((a: ITransactionModel, b: ITransactionModel) => {
+                return a.date < b.date ? 1 : -1;
+            });
             return rows.map((row: ITransactionModel) => {
                 return (
                     <Row key={row.id}

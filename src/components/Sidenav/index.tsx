@@ -11,10 +11,9 @@ import { SideNavContainer } from './styles';
 export function SideNav() {
 
 function handleLogout () {
-    //localStorage.removeItem('token');
-    //window.location.href = '/';
-    console.log('logout');
-
+    sessionStorage.removeItem('token');
+    window.location.href = '/login';
+    
 }
 
 

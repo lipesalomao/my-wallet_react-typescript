@@ -5,10 +5,11 @@ import { SignUp } from "../pages/SignUp";
 
 export function Auth() {
     return (
-        <AppContainer>
+
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/signUp" element={<SignUp />} />
             </Routes>
-        </AppContainer>
+
     );
 }

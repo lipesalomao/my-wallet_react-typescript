@@ -1,10 +1,11 @@
+import { LoginComponent } from "../../components/LoginComponent";
 import { SignUpComponent } from "../../components/SingUpComponent";
+import { SignUpContainer } from "./styles";
 
 export function SignUp() {
     return (
-        <div>
-            <h1>Sign up page</h1>
-            <SignUpComponent/>
-        </div>
+        <SignUpContainer>
+            <LoginComponent type="signup"/>
+        </SignUpContainer>
     )
 }

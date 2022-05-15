@@ -3,7 +3,7 @@ export interface ITransactionModel {
     id?: number;
     title: string;
     type: string;
-    date: string;
+    date: Date;
     frequency: string;
     value: number;
     description?: string;

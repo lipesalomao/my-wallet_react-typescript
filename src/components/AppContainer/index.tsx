@@ -15,7 +15,7 @@ export function AppContainer(props: any) {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}> 
             <ContentContainer>
                 <SideNav />
                 <div className="contentColumn">

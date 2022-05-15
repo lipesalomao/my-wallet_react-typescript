@@ -8,7 +8,8 @@ import {
 } from "../../services/global-service";
 import { ITransactionModel } from "../../models/TransactionModel";
 import { useParams } from "react-router-dom";
-import DatePicker from 'react-datepicker'
+import br from "date-fns/locale/pt-BR";
+import DatePicker from "react-datepicker";
 
 export function NewTransaction() {
     const location = useParams();
@@ -23,7 +24,7 @@ export function NewTransaction() {
             setType(res.type);
             setFrequency(res.frequency);
             setValue(res.value);
-            setDate(res.date);
+            setDate(new Date(res.date));
             setDescription(res.description ? res.description : "");
         });
     };
@@ -31,7 +32,7 @@ export function NewTransaction() {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("entrada");
     const [frequency, setFrequency] = useState("recorrente");
-    const [date, setDate] = useState<string>('');
+    const [date, setDate] = useState<Date>(new Date());
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState("");
 
@@ -48,7 +49,7 @@ export function NewTransaction() {
         setTitle("");
         setType("entrada");
         setFrequency("recorrente");
-        setDate('');
+        setDate(new Date());
         setValue(0);
         setDescription("");
 
@@ -97,7 +98,7 @@ export function NewTransaction() {
                 </div>
 
                 <div className="detailsInputsContainer">
-                    <div>
+                    <div className="type">
                         <span>Tipo</span>
                         <select
                             name="type"
@@ -109,18 +110,25 @@ export function NewTransaction() {
                             <option value="saída">Saída</option>
                         </select>
                     </div>
-                    <div>
+                    <div className="date">
                         <span>Data</span>
-                        <input
+                        {/* <input
                             type="date"
-                            name="date"
                             required
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
-                        />
-                        {/* <DatePicker selected={date} onChange={date => date? setDate(date): setDate(new Date())}/> */}
+                        /> */}
+                        <div>
+                            <DatePicker
+                                className="datePicker"
+                                locale={br}
+                                dateFormat={"dd/MM/yyyy"}
+                                selected={date}
+                                onChange={(date: any) => setDate(date)}
+                            />
+                        </div>
                     </div>
-                    <div>
+                    <div className="frequency">
                         <span>Frequência</span>
                         <select
                             name="frequency"
@@ -132,7 +140,7 @@ export function NewTransaction() {
                             <option value="eventual">Eventual</option>
                         </select>
                     </div>
-                    <div>
+                    <div className="value">
                         <span>Valor</span>
                         <input
                             type="number"
@@ -165,12 +173,12 @@ export function NewTransaction() {
                             Voltar
                         </button>
                         <button
+                            disabled={!title || !date || !value}
                             onClick={() => {
                                 handleSubmit();
                             }}
                         >
-                            {location.id ? "Atualizar" : "Cadastrar"}{" "}
-                            {/* TODO: enable only if required fields are filled */}
+                            {location.id ? "Atualizar" : "Cadastrar"}
                         </button>
                     </div>
                 </div>

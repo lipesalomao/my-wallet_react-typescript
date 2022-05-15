@@ -5,7 +5,7 @@
       "title": "Freela Website",
       "type": "entrada",
       "frequency": "eventual",
-      "date": "2022-05-10",
+      "date": "2022-05-10T00:00:00.000Z",
       "value": 2000,
       "description": "Freela de website para advogado",
       "id": "5aN4sJN"
@@ -15,7 +15,7 @@
       "title": "Venda notebook",
       "type": "entrada",
       "frequency": "eventual",
-      "date": "2022-05-11",
+      "date": "2022-05-11T00:00:00.000Z",
       "value": 1500,
       "description": "Vendido notebook da sony",
       "id": "IcTqlJt"
@@ -25,7 +25,7 @@
       "title": "Aluguel",
       "type": "saída",
       "frequency": "recorrente",
-      "date": "2022-05-10",
+      "date": "2022-05-10T00:00:00.000Z",
       "value": 800,
       "description": "Aluguel",
       "id": "jttKGg_"
@@ -35,7 +35,7 @@
       "title": "Teste02",
       "type": "saída",
       "frequency": "eventual",
-      "date": "2022-12-31",
+      "date": "2022-12-31T00:00:00.000Z",
       "value": 500,
       "description": "Teste 02 ",
       "id": "hoWA8I5"
@@ -45,7 +45,7 @@
       "title": "Salário",
       "type": "entrada",
       "frequency": "recorrente",
-      "date": "2022-12-31",
+      "date": "2022-12-31T00:00:00.000Z",
       "value": 2000,
       "description": "Salário Directon 3",
       "id": "d8qXm29"
@@ -55,10 +55,48 @@
       "title": "Compra Tablet Samsung",
       "type": "saída",
       "frequency": "eventual",
-      "date": "2022-10-28",
+      "date": "2022-10-28T00:00:00.000Z",
       "value": 1500,
       "description": "Compra tablet samsung s6 lite",
       "id": "CYxiQzY"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Redbubble",
+      "type": "entrada",
+      "frequency": "recorrente",
+      "date": "2022-05-16T18:01:22.000Z",
+      "value": 500,
+      "description": "",
+      "id": "u1CKiuU"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Teste--01",
+      "type": "entrada",
+      "frequency": "recorrente",
+      "date": "2022-05-15T18:42:16.000Z",
+      "value": 510,
+      "description": "teste",
+      "id": "Q67RWti"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Internet",
+      "type": "saída",
+      "frequency": "recorrente",
+      "date": "2022-05-15T18:51:58.924Z",
+      "value": 100,
+      "description": "internet",
+      "id": "UbiB35Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "ABC123",
+      "name": "Felipe",
+      "email": "felipe.salomao.f@gmail.com",
+      "password": "123456"
     }
   ]
 }

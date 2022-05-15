@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom'
 
 import { App } from './app.routes';
@@ -6,11 +7,19 @@ import { Auth } from './auth.routes';
 
 
 export function Routes(){
-    const loggedIn = true;
+
+    const [isLogged, setIsLogged] = useState(false);
+
+    //check if user is logged
+    useEffect(() => {
+        if(sessionStorage.getItem("token")){
+            setIsLogged(true);
+        }
+    }, []);
 
     return (
         <Router>
-            { loggedIn ? <App /> : <Auth /> }
+            { isLogged ? <App /> : <Auth /> }
         </Router>
     )
 }

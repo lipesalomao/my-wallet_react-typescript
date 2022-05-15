@@ -55,3 +55,13 @@ export async function deleteTransaction(id: string) {
     );
     return response.data;
 }
+
+export async function login(email: string, password: string) {
+    // verify if email and password existis
+    const response = await axios.get(
+        `http://localhost:3333/users?email=${email}&password=${password}`
+    ).catch((error) => {
+        console.log(error);
+    });
+    return response;
+}
