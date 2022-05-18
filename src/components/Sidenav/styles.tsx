@@ -28,9 +28,6 @@ export const SideNavContainer = styled.div`
             color: ${props => props.theme.text.secondary};
             transition: all 0.2s ease-in-out;
             
-            &:hover {
-                background-color: ${props => props.theme.colors.secondary};
-            }
             
             a {
                 text-decoration: none;

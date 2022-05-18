@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { ITransactionModel } from "../../models/TransactionModel";
-import { getTransactionsByType } from "../../services/global-service";
+import { useApi } from "../../hooks/useApi";
 import { Row } from "../Row";
 import { ListContainer } from "./styles";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 export function List(props: any) {
     const actualYear = new Date().getFullYear();
-
+    const api = useApi();
+    const auth = useContext(AuthContext);
     const { text } = useContext(ThemeContext);
 
     const [year, setYear] = useState<number>(new Date().getFullYear());
@@ -15,9 +17,11 @@ export function List(props: any) {
     const [rows, setRows] = useState<ITransactionModel[]>([]);
 
     async function getTransactionByType() {
-        await getTransactionsByType(year, month, props.type).then((res: any) => {
-            setRows(res);
-        });
+        await api
+            .getTransactionsByType(year, month, props.type, auth.user[0].uid)
+            .then((res: any) => {
+                setRows(res);
+            });
     }
 
     function populateList() {
@@ -27,15 +31,15 @@ export function List(props: any) {
             });
             return rows.map((row: ITransactionModel) => {
                 return (
-                    <Row key={row.id}
+                    <Row
+                        key={row.id}
                         userId={row.user_id}
                         id={row.id}
                         title={row.title}
                         type={row.type}
                         frequency={row.frequency}
                         value={row.value}
-                     />
-                    
+                    />
                 );
             });
         } else {
@@ -48,9 +52,7 @@ export function List(props: any) {
                         color: `${text.primary}`,
                     }}
                 >
-                    <h3 style={{ opacity: "0.4" }}>
-                        Sem dados para exibir.
-                    </h3>
+                    <h3 style={{ opacity: "0.4" }}>Sem dados para exibir.</h3>
                 </div>
             );
         }

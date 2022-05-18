@@ -1,6 +1,7 @@
 import { RowContainer } from "./styles";
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Row(props: any) {
     useEffect(() => {
@@ -8,12 +9,13 @@ export function Row(props: any) {
     }, []);
 
     const [value, setValue] = useState<number>(0);
+    const navigate = useNavigate();
 
     return (
         <RowContainer
             frequency={props.frequency}
             onClick={(e) => {
-                window.location.href = `/new/${props.id}`;
+                navigate(`/new/${props.id}`);
             }}
         >
             <div className="rowContentContainer">

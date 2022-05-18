@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ITransactionModel } from "../../models/TransactionModel";
-import { getTAllTransactions } from "../../services/global-service";
+import { useApi } from "../../hooks/useApi";
 import { DashboardContainer } from "./styles";
 import CountUp from "react-countup";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
+
 
 export function Dashboard() {
+    const api = useApi();
     const actualYear = new Date().getFullYear();
     const [year, setYear] = useState<number>(new Date().getFullYear());
     const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
@@ -13,8 +16,10 @@ export function Dashboard() {
     const [lastIncomeDate, setLastIncomeDate] = useState<string>("");
     const [lastExpenseDate, setLastExpenseDate] = useState<string>("");
 
+    const auth = useContext(AuthContext);
+
     async function getFullData() {
-        await getTAllTransactions(year, month).then(
+        await api.getAllTransactions(year, month, auth.user![0].uid).then(
             (res: ITransactionModel[]) => {
                 handleData(res);
             }
@@ -160,7 +165,9 @@ export function Dashboard() {
             </div>
             <div className="secondCardsContainer">
                 <div className="wellDoneCard"></div>
-                <div className="pieChartCard"></div>
+                <div className="pieChartCard">
+                    
+                </div>
             </div>
             <div className="lineChartCard"></div>
             <div className="lastCardsContainer">

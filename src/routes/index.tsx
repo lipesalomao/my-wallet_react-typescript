@@ -1,25 +1,18 @@
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom'
+import { AuthContext } from '../contexts/Auth/AuthContext';
 
 import { App } from './app.routes';
 import { Auth } from './auth.routes';
 
 
 export function Routes(){
-
-    const [isLogged, setIsLogged] = useState(false);
-
-    //check if user is logged
-    useEffect(() => {
-        if(sessionStorage.getItem("token")){
-            setIsLogged(true);
-        }
-    }, []);
-
+    const auth = useContext(AuthContext);
+   
     return (
         <Router>
-            { isLogged ? <App /> : <Auth /> }
+            { auth.user ? <App /> : <Auth /> }
         </Router>
     )
 }

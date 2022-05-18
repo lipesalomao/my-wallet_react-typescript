@@ -1,25 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NewTransactionContainer } from "./styles";
-import {
-    deleteTransaction,
-    getTransactionById,
-    newTransaction,
-    updateTransaction,
-} from "../../services/global-service";
+import { useApi } from "../../hooks/useApi";
 import { ITransactionModel } from "../../models/TransactionModel";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import br from "date-fns/locale/pt-BR";
 import DatePicker from "react-datepicker";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 export function NewTransaction() {
     const location = useParams();
+    const api = useApi()
 
     useEffect(() => {
         location.id ? populateForm(location.id) : null;
     }, []);
 
     const populateForm = (id: string | null) => {
-        getTransactionById(id).then((res: ITransactionModel) => {
+        api.getTransactionById(id).then((res: ITransactionModel) => {
             setTitle(res.title);
             setType(res.type);
             setFrequency(res.frequency);
@@ -29,15 +26,18 @@ export function NewTransaction() {
         });
     };
 
-    const [title, setTitle] = useState("");
-    const [type, setType] = useState("entrada");
-    const [frequency, setFrequency] = useState("recorrente");
+    const [title, setTitle] = useState<string>("");
+    const [type, setType] = useState<string>("entrada");
+    const [frequency, setFrequency] = useState<string>("recorrente");
     const [date, setDate] = useState<Date>(new Date());
-    const [value, setValue] = useState(0);
-    const [description, setDescription] = useState("");
+    const [value, setValue] = useState<number>(0);
+    const [description, setDescription] = useState<string>("");
+
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const data: ITransactionModel = {
-        user_id: "ABC123", //TODO: get user id from local storagea
+        user_id: auth.user![0].uid,
         title: title,
         type: type,
         frequency: frequency,
@@ -54,25 +54,25 @@ export function NewTransaction() {
         setDescription("");
 
         if (location.id) {
-            updateTransaction(location.id, data);
+            api.updateTransaction(location.id, data);
         } else {
-            newTransaction(data);
+            api.newTransaction(data);
         }
 
         redirect();
     }
 
     function deleteTransactionHandler() {
-        deleteTransaction(location.id!);
+        api.deleteTransaction(location.id!);
 
         redirect();
     }
 
     function redirect() {
         if (type === "entrada") {
-            window.location.href = "/in";
+            navigate("/in");
         } else {
-            window.location.href = "/out";
+            navigate("/out");
         }
     }
 
@@ -91,7 +91,7 @@ export function NewTransaction() {
                     <input
                         type="text"
                         name="title"
-                        required
+                        required={true}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
@@ -112,12 +112,6 @@ export function NewTransaction() {
                     </div>
                     <div className="date">
                         <span>Data</span>
-                        {/* <input
-                            type="date"
-                            required
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                        /> */}
                         <div>
                             <DatePicker
                                 className="datePicker"
@@ -143,10 +137,11 @@ export function NewTransaction() {
                     <div className="value">
                         <span>Valor</span>
                         <input
+                            
                             type="number"
                             name="value"
                             value={value}
-                            required
+                            required={true}
                             onChange={(e) => setValue(Number(e.target.value))}
                         />
                     </div>
@@ -169,7 +164,7 @@ export function NewTransaction() {
                         <div></div>
                     )}
                     <div>
-                        <button onClick={() => (window.location.href = "/")}>
+                        <button onClick={() => navigate("/")}>
                             Voltar
                         </button>
                         <button

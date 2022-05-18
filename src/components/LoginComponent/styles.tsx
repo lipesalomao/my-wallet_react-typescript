@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const LoginContainer = styled.div`
+type ContainerProps = {
+    type: "signup" | "login";
+};
+
+export const LoginContainer = styled.div<ContainerProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +18,7 @@ export const LoginContainer = styled.div`
         padding: 2rem;
         gap: 1rem;
         width: 300px;
-        height: 300px;
+        height: ${props => props.type === "signup" ? "370px" : "300px"};
         border-radius: 10px;
         margin: 1.5rem 0 3rem 0;
         background-color: ${(props) => props.theme.colors.secondary};
@@ -50,6 +54,7 @@ export const LoginContainer = styled.div`
         text-decoration: none;
         color: ${(props) => props.theme.text.primary};
         opacity: 0.5;
+        font-size: 0.8rem;
 
 
         &:hover {

@@ -4,17 +4,14 @@ import { ThemeContext } from "styled-components";
 import Switch from "react-switch";
 import light from "../../styles/themes/light";
 import dark from "../../styles/themes/dark";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 interface IHeaderProps {
     toggleTheme: () => void;
 }
 
 export function Header(props: IHeaderProps) {
-    useEffect(() => {
-        setUserData(JSON.parse(sessionStorage.getItem("token")?? "")[0]);
-    }, []);
-
-    const [userData, setUserData] = useState<any>({})
+    const auth = useContext(AuthContext);
     const { colors, title } = useContext(ThemeContext);
 
     return (
@@ -37,7 +34,7 @@ export function Header(props: IHeaderProps) {
             </div>
             <div>
                 <h2>Olá,</h2>
-                <span>{userData ? userData.name : ''}</span>
+                <span>{auth.user![0].name?? ''}</span>
             </div>
         </HeaderContainer>
     );

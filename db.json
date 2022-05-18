@@ -22,26 +22,6 @@
     },
     {
       "user_id": "ABC123",
-      "title": "Aluguel",
-      "type": "saída",
-      "frequency": "recorrente",
-      "date": "2022-05-10T00:00:00.000Z",
-      "value": 800,
-      "description": "Aluguel",
-      "id": "jttKGg_"
-    },
-    {
-      "user_id": "ABC123",
-      "title": "Teste02",
-      "type": "saída",
-      "frequency": "eventual",
-      "date": "2022-12-31T00:00:00.000Z",
-      "value": 500,
-      "description": "Teste 02 ",
-      "id": "hoWA8I5"
-    },
-    {
-      "user_id": "ABC123",
       "title": "Salário",
       "type": "entrada",
       "frequency": "recorrente",
@@ -72,16 +52,6 @@
     },
     {
       "user_id": "ABC123",
-      "title": "Teste--01",
-      "type": "entrada",
-      "frequency": "recorrente",
-      "date": "2022-05-15T18:42:16.000Z",
-      "value": 510,
-      "description": "teste",
-      "id": "Q67RWti"
-    },
-    {
-      "user_id": "ABC123",
       "title": "Internet",
       "type": "saída",
       "frequency": "recorrente",
@@ -93,10 +63,11 @@
   ],
   "users": [
     {
-      "id": "ABC123",
+      "uid": "ABC123",
       "name": "Felipe",
-      "email": "felipe.salomao.f@gmail.com",
-      "password": "123456"
+      "email": "felipe@gmail.com",
+      "password": "123",
+      "token": "AFoau1346i1oih4156ph1p23h5ph16"
     }
   ]
 }

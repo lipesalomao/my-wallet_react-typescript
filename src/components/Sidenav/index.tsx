@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
     MdDashboard,
     MdArrowDownward,
@@ -5,17 +6,21 @@ import {
     MdOutlineExitToApp,
     MdAccountBalanceWallet,
 } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { Logo } from '../Logo';
 import { SideNavContainer } from './styles';
 
 export function SideNav() {
 
-function handleLogout () {
-    sessionStorage.removeItem('token');
-    window.location.href = '/login';
-    
-}
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
 
+async function handleLogout () {
+    await auth.signout();
+    
+    window.location.href = '/login';  
+}
 
     return (
         <SideNavContainer>
