@@ -6,12 +6,9 @@ export const useApi = () => ({
     newTransaction: async (data: ITransactionModel) => {
         const response = await axios
             .post("http://localhost:3333/transactions", data)
-            .then((response) => {})
-            .catch((error) => {
-                console.log(error);
-            });
+            
         return response;
-    },
+    },  
 
     getTransactionsByType: async (
         year: number,
@@ -62,30 +59,19 @@ export const useApi = () => ({
         const response = await axios.get(
             `http://localhost:3333/users?token=${token}`
         );
-        return response.data;
+        
+        return response.data[0];
     },
 
     signin: async (email: string, password: string) => {
-        let data: {} = {};
-        const response = await axios
-            .get(
-                `http://localhost:3333/users?email=${email}&password=${password}`
-            )
-            .then((res) => {
-                if (res.status === 200) {
-                    return {
-                        user: res.data[0],
-                        token: res.data[0].token,
-                    };
-                } else {
-                    return {
-                        user: null,
-                        token: null,
-                    };
-                }
-            });
-
-        return response;
+        //const response = await axios.post(`http://localhost:3333/users`, {email, password})
+        const response = await axios.get(`http://localhost:3333/users?email=${email}&password=${password}`)
+ 
+        return {
+            user: response.data[0],
+            token: response.data[0].token
+        }
+        
     },
 
     signout: async () => {
@@ -100,7 +86,6 @@ export const useApi = () => ({
             return await api.register(name, email, password);
         }
 
-        console.warn(response);
         return "E-mail já cadastrado.";
     },
 

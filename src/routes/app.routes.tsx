@@ -5,15 +5,16 @@ import { New } from "../pages/new";
 import { Home } from "../pages/home";
 import { Out } from "../pages/out";
 
+
 export function App() {
     return (
         <AppContainer>
             <Routes>
+                <Route path="new" element={<New />} />
+                <Route path="new/:id" element={<New />} />
+                <Route path="in" element={<In />} />
+                <Route path="out" element={<Out />} />
                 <Route path="/" element={<Home />} />
-                <Route path="/new" element={<New />} />
-                <Route path="/new/:id" element={<New />} />
-                <Route path="/in" element={<In />} />
-                <Route path="/out" element={<Out />} />
             </Routes>
         </AppContainer>
     );

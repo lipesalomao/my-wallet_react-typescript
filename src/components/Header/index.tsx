@@ -11,7 +11,7 @@ interface IHeaderProps {
 }
 
 export function Header(props: IHeaderProps) {
-    const auth = useContext(AuthContext);
+    const auth: any = useContext(AuthContext);
     const { colors, title } = useContext(ThemeContext);
 
     return (
@@ -34,7 +34,7 @@ export function Header(props: IHeaderProps) {
             </div>
             <div>
                 <h2>Olá,</h2>
-                <span>{auth.user![0].name?? ''}</span>
+                <span>{auth.user.name}</span>
             </div>
         </HeaderContainer>
     );

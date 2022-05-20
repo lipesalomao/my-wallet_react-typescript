@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const ListContainer = styled.div`
+type IListProps = {
+    type: string;
+}
+
+export const ListContainer = styled.div<IListProps>`
     display: flex;
     flex-direction: column;
 
@@ -18,7 +22,7 @@ export const ListContainer = styled.div`
             .titleUnderline {
                 width: 60px;
                 height: 8px;
-                background-color: ${({ theme }) => theme.colors.accent};
+                background-color: ${(props) => props.type === "entrada" ?  props.theme.colors.accent : props.theme.colors.warn};
             }
         }
 

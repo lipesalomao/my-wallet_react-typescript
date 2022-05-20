@@ -4,6 +4,7 @@ import { useApi } from "../../hooks/useApi";
 import { DashboardContainer } from "./styles";
 import CountUp from "react-countup";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { IUserModel } from "../../models/UserModel";
 
 
 export function Dashboard() {
@@ -16,10 +17,11 @@ export function Dashboard() {
     const [lastIncomeDate, setLastIncomeDate] = useState<string>("");
     const [lastExpenseDate, setLastExpenseDate] = useState<string>("");
 
-    const auth = useContext(AuthContext);
+    const auth: any = useContext(AuthContext);
 
     async function getFullData() {
-        await api.getAllTransactions(year, month, auth.user![0].uid).then(
+        
+        await api.getAllTransactions(year, month, auth.user.uid).then(
             (res: ITransactionModel[]) => {
                 handleData(res);
             }

@@ -9,7 +9,7 @@ import { AuthContext } from "../../contexts/Auth/AuthContext";
 export function List(props: any) {
     const actualYear = new Date().getFullYear();
     const api = useApi();
-    const auth = useContext(AuthContext);
+    const auth: any = useContext(AuthContext);
     const { text } = useContext(ThemeContext);
 
     const [year, setYear] = useState<number>(new Date().getFullYear());
@@ -18,7 +18,7 @@ export function List(props: any) {
 
     async function getTransactionByType() {
         await api
-            .getTransactionsByType(year, month, props.type, auth.user[0].uid)
+            .getTransactionsByType(year, month, props.type, auth.user.uid)
             .then((res: any) => {
                 setRows(res);
             });
@@ -65,10 +65,10 @@ export function List(props: any) {
     }, [year, month]);
 
     return (
-        <ListContainer>
+        <ListContainer type={props.type}>
             <div className="headerContainer">
                 <div>
-                    <h1 className="title">Entradas</h1>
+                    <h1 className="title">{props.type === "entrada" ? "Entradas" : "Saídas"}</h1>
                     <div className="titleUnderline"></div>
                 </div>
                 <div className="filterContainer">

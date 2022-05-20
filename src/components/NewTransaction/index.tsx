@@ -10,9 +10,12 @@ import { AuthContext } from "../../contexts/Auth/AuthContext";
 export function NewTransaction() {
     const location = useParams();
     const api = useApi()
+    const auth: any = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         location.id ? populateForm(location.id) : null;
+        console.warn(auth)
     }, []);
 
     const populateForm = (id: string | null) => {
@@ -33,11 +36,8 @@ export function NewTransaction() {
     const [value, setValue] = useState<number>(0);
     const [description, setDescription] = useState<string>("");
 
-    const auth = useContext(AuthContext);
-    const navigate = useNavigate();
-
     const data: ITransactionModel = {
-        user_id: auth.user![0].uid,
+        user_id: auth.user.uid,
         title: title,
         type: type,
         frequency: frequency,
@@ -74,6 +74,13 @@ export function NewTransaction() {
         } else {
             navigate("/out");
         }
+    }
+    async function teste(){
+        auth.signin("felipe@gmail.com", "123");
+        //console.warn(auth.user!.uid);
+
+        const res = await api.signin("felipe@gmail.com", "123")
+        //console.warn("teste", res);
     }
 
     return (
@@ -175,6 +182,7 @@ export function NewTransaction() {
                         >
                             {location.id ? "Atualizar" : "Cadastrar"}
                         </button>
+                        <button onClick={e => teste()}>teste</button>
                     </div>
                 </div>
             </div>

@@ -21,10 +21,9 @@ export function LoginComponent(props: any) {
     async function loginHandler() {
         if (email && password) {
             const isLogged = await auth.signin(email, password);
+
             if (isLogged) {
                 navigate("/");
-            } else {
-                alert("Login failed"); // temp
             }
         }
     }
@@ -33,7 +32,7 @@ export function LoginComponent(props: any) {
         if (name && email && password && confirmPassword) {
             if (password === confirmPassword) {
                 const response = await api.validateUser(name, email, password);
-                console.log(response);
+                
             } else {
                 alert("Passwords do not match"); // temp
             }
@@ -65,7 +64,7 @@ export function LoginComponent(props: any) {
                     <input
                         type="password"
                         autoComplete="off"
-                        placeholder="Escolha sua senha"
+                        placeholder="Digite sua senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />

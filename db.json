@@ -59,10 +59,21 @@
       "value": 100,
       "description": "internet",
       "id": "UbiB35Z"
+    },
+    {
+      "user_id": "ABC123",
+      "title": "Teste",
+      "type": "saída",
+      "frequency": "recorrente",
+      "date": "2022-05-20T00:05:51.917Z",
+      "value": 123,
+      "description": "",
+      "id": "1Eob2Z9"
     }
   ],
   "users": [
     {
+      "id": "1",
       "uid": "ABC123",
       "name": "Felipe",
       "email": "felipe@gmail.com",

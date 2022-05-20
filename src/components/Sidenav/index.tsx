@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { Logo } from '../Logo';
 import { SideNavContainer } from './styles';
+import { Link } from 'react-router-dom';
+
 
 export function SideNav() {
 
@@ -19,7 +21,7 @@ export function SideNav() {
 async function handleLogout () {
     await auth.signout();
     
-    window.location.href = '/login';  
+    navigate("/login");
 }
 
     return (
@@ -28,19 +30,20 @@ async function handleLogout () {
             <div className="linksContainer">
                 <div>
                     <MdDashboard />
-                    <a href="/">Dashboard</a>
+                    <Link to="/">Dashboard</Link>
                 </div>
                 <div>
                     <MdAccountBalanceWallet />
-                    <a href="/new">Novo Registro</a>
+                    <Link to="/new">Novo Registro</Link>
                 </div>
                 <div>
                     <MdArrowDownward />
-                    <a href="/in">Entradas</a>
+                    <Link to="/in">Entradas</Link>
+                    <a href="in">Entradas</a>
                 </div>
                 <div>
                     <MdArrowUpward />
-                    <a href="/out">Saídas</a>
+                    <Link to="/out">Saídas</Link>
                 </div>
                 <div>
                     <MdOutlineExitToApp />

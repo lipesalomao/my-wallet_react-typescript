@@ -9,7 +9,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 //TODO: implement a button on header to hide/show the sidenav
 //TODO: responsivity
 //TODO: implement a warn to create, update and delete transactions
-//TODO change all hrefs to Link to...
+
 
 ReactDOM.render(
     <React.StrictMode>
