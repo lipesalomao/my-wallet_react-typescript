@@ -5,6 +5,7 @@ import { Logo } from "../Logo";
 import { LoginContainer } from "./styles";
 import { Link } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
+import { MdEmail, MdLock, MdPerson } from 'react-icons/md'
 
 export function LoginComponent(props: any) {
     const auth = useContext(AuthContext);
@@ -48,33 +49,47 @@ export function LoginComponent(props: any) {
                         <span className="title">Cadastrar</span>
                         <div className="titleUnderline"></div>
                     </div>
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        placeholder="Seu nome"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <input
-                        type="email"
-                        placeholder="Seu email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        autoComplete="off"
-                        placeholder="Digite sua senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        autoComplete="off"
-                        placeholder="Confirme sua senha"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
+                    
+                    <div>
+                        <MdPerson className="icon"/>
+                        <input
+                            type="text"
+                            autoComplete="off"
+                            placeholder="Seu nome"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <MdEmail className="icon"/>
+                        <input
+                            type="email"
+                            placeholder="Seu email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <MdLock className="icon"/>
+                        <input
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Digite sua senha"
+                            minLength={6}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <MdLock className="icon"/>
+                        <input
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Confirme sua senha"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
 
                     <button
                         onClick={() => {
@@ -101,20 +116,26 @@ export function LoginComponent(props: any) {
                     <span className="title">Entrar</span>
                     <div className="titleUnderline"></div>
                 </div>
-                <input
-                    type="email"
-                    placeholder="exemple@email.com"
-                    value={email}
-                    autoComplete="off"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="******"
-                    autoComplete="off"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <div>
+                    <MdEmail className="icon"/>
+                    <input
+                        type="email"
+                        placeholder="exemple@email.com"
+                        value={email}
+                        autoComplete="off"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <MdLock className="icon"/>
+                    <input
+                        type="password"
+                        placeholder="******"
+                        autoComplete="off"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
 
                 <button
                     onClick={() => {

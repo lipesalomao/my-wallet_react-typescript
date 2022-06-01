@@ -39,7 +39,6 @@ async function handleLogout () {
                 <div>
                     <MdArrowDownward />
                     <Link to="/in">Entradas</Link>
-                    <a href="in">Entradas</a>
                 </div>
                 <div>
                     <MdArrowUpward />

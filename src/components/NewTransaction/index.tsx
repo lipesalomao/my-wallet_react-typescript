@@ -45,6 +45,7 @@ export function NewTransaction() {
         value: value,
         description: description,
     };
+    
     function handleSubmit() {
         setTitle("");
         setType("entrada");
