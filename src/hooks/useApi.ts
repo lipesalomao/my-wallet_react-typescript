@@ -4,7 +4,7 @@ import axios from "axios";
 export const useApi = () => ({
     
     newTransaction: async (data: ITransactionModel) => {
-        const response = await axios.post("http://localhost:3330/transactions", data)
+        const response = await axios.post("http://localhost:3333/transactions", data)
         return response;
     },  
 
@@ -15,7 +15,7 @@ export const useApi = () => ({
         user_id: string
     ) => {
         const response = await axios.get(
-            `http://localhost:3330/transactions?type=${type}&user_id=${user_id}`
+            `http://localhost:3333/transactions?type=${type}&user_id=${user_id}`
         );
         return response.data;
     },
@@ -26,21 +26,21 @@ export const useApi = () => ({
         user_id: string
     ) => {
         const response = await axios.get(
-            `http://localhost:3330/transactions?user_id=${user_id}`
+            `http://localhost:3333/transactions?user_id=${user_id}`
         );
         return response.data;
     },
 
     getTransactionById: async (id: string | null) => {
         const response = await axios.get(
-            `http://localhost:3330/transactions/${id}`
+            `http://localhost:3333/transactions/${id}`
         );
         return response.data;
     },
 
     updateTransaction: async (id: string, data: ITransactionModel) => {
         const response = await axios.put(
-            `http://localhost:3330/transactions/${id}`,
+            `http://localhost:3333/transactions/${id}`,
             data
         );
         return response.data;
@@ -48,22 +48,22 @@ export const useApi = () => ({
 
     deleteTransaction: async (id: string) => {
         const response = await axios.delete(
-            `http://localhost:3330/transactions/${id}`
+            `http://localhost:3333/transactions/${id}`
         );
         return response.data;
     },
 
     validateToken: async (token: string) => {
         const response = await axios.get(
-            `http://localhost:3330/users?token=${token}`
+            `http://localhost:3333/users?token=${token}`
         );
         
         return response.data[0];
     },
 
     signin: async (email: string, password: string) => {
-        //const response = await axios.post(`http://localhost:3330/users`, {email, password})
-        const response = await axios.get(`http://localhost:3330/users?email=${email}&password=${password}`)
+        //const response = await axios.post(`http://localhost:3333/users`, {email, password})
+        const response = await axios.get(`http://localhost:3333/users?email=${email}&password=${password}`)
  
         return {
             user: response.data[0],
@@ -73,12 +73,12 @@ export const useApi = () => ({
     },
 
     signout: async () => {
-        const response = axios.post("http://localhost:3330/users/signout");
+        const response = axios.post("http://localhost:3333/users/signout");
     },
 
     validateUser: async (name: string, email: string, password: string) => {
         const api = useApi();
-        const response = await axios.get(`http://localhost:3330/users?email=${email}`);
+        const response = await axios.get(`http://localhost:3333/users?email=${email}`);
 
         if (response.status === 200) {
             return await api.register(name, email, password);
@@ -88,7 +88,7 @@ export const useApi = () => ({
     },
 
     register: async (name: string, email: string, password: string) => {
-        const response = await axios.post("http://localhost:3330/users", {
+        const response = await axios.post("http://localhost:3333/users", {
             name,
             email,
             password,

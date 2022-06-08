@@ -15,8 +15,8 @@ export function AppContainer(props: any) {
     };
 
     return (
-        <ThemeProvider theme={theme}> 
-            <ContentContainer>
+        <ContentContainer>
+            <ThemeProvider theme={theme}> 
                 <SideNav />
                 <div className="contentColumn">
                     <Header toggleTheme={toggleTheme} />
@@ -24,7 +24,7 @@ export function AppContainer(props: any) {
                         {props.children}
                     </Content>
                 </div>
-            </ContentContainer>
-        </ThemeProvider>
+            </ThemeProvider>
+        </ContentContainer>
     );
 }

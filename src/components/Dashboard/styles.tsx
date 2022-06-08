@@ -99,6 +99,71 @@ export const DashboardContainer = styled.div`
             border-radius: 10px;
             background: ${(props) => props.theme.colors.secondary};
         }
+        .pieChartCard {
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                width: 60%;
+                flex-direction: column;
+                gap: 1rem;
+                color: ${({ theme }) => theme.text.primary};
+
+                .balance {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-items: center;
+                }
+                .title {
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    margin-bottom: 2rem;
+                }
+                .text {
+                    font-size: 0.9rem;
+                }
+                .incomes-balance,
+                .expenses-balance {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 15%;
+                    display: flex;
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 5px;
+                    color: #fff;
+                    background: ${({ theme }) => theme.colors.yellow};
+                }
+                .expenses-balance {
+                    background: ${({ theme }) => theme.colors.warn};
+                }
+            }
+        }
+        .messageCard{
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            justify-content: space-between;
+            color: ${({ theme }) => theme.text.primary};
+
+            .title {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+            .subtitle{
+                font-size: 0.9rem;
+                font-weight: lighter;
+            }
+        }
     }
     .lineChartCard {
         display: flex;

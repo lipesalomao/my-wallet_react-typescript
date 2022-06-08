@@ -15,7 +15,7 @@ export function Row(props: any) {
         <RowContainer
             frequency={props.frequency}
             onClick={(e) => {
-                navigate(`/new/${props.id}`);
+                navigate(`/edit/${props.id}`);
             }}
         >
             <div className="rowContentContainer">

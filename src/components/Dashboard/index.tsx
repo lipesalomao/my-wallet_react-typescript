@@ -5,7 +5,7 @@ import { DashboardContainer } from "./styles";
 import CountUp from "react-countup";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { IUserModel } from "../../models/UserModel";
-
+import { PieChartComponent } from "../Charts/PieChart";
 
 export function Dashboard() {
     const api = useApi();
@@ -19,25 +19,39 @@ export function Dashboard() {
 
     const auth: any = useContext(AuthContext);
 
+    const balanceCalc = (incomes: number, expenses: number) => {
+        const totalAmount = incomes + expenses;
+        const expensesPercentage = ((expenses / totalAmount) * 100).toFixed(2);
+        const incomesPercentage = ((incomes / totalAmount) * 100).toFixed(2);
+
+        return {
+            expensesPercentage,
+            incomesPercentage
+        };
+    }
+
     async function getFullData() {
-        
-        await api.getAllTransactions(year, month, auth.user.uid).then(
-            (res: ITransactionModel[]) => {
+        await api
+            .getAllTransactions(year, month, auth.user.uid)
+            .then((res: ITransactionModel[]) => {
                 handleData(res);
-            }
-        );
+            });
     }
 
     function handleData(data: ITransactionModel[]) {
         let incomes: any = [];
         let expenses: any = [];
 
-        const incomesSort = data.sort((a: ITransactionModel, b: ITransactionModel) => {
-            return a.date < b.date ? 1 : -1;
-        });
-        const expensesSort = data.sort((a: ITransactionModel, b: ITransactionModel) => {
-            return a.date < b.date ? 1 : -1;
-        });
+        const incomesSort = data.sort(
+            (a: ITransactionModel, b: ITransactionModel) => {
+                return a.date < b.date ? 1 : -1;
+            }
+        );
+        const expensesSort = data.sort(
+            (a: ITransactionModel, b: ITransactionModel) => {
+                return a.date < b.date ? 1 : -1;
+            }
+        );
 
         data.map((item: ITransactionModel) => {
             if (item.type === "entrada") {
@@ -50,7 +64,6 @@ export function Dashboard() {
         setTotalIncomes(incomes.reduce((a: number, b: number) => a + b, 0));
         setTotalExpenses(expenses.reduce((a: number, b: number) => a + b, 0));
 
-        
         setLastIncomeDate(new Date(incomesSort[0].date).toLocaleDateString());
         setLastExpenseDate(new Date(expensesSort[0].date).toLocaleDateString());
     }
@@ -166,9 +179,38 @@ export function Dashboard() {
                 </div>
             </div>
             <div className="secondCardsContainer">
-                <div className="wellDoneCard"></div>
+                <div className="messageCard">
+                    <span className="title">
+                        {
+                            totalIncomes > totalExpenses
+                                ? "Muito bem! Sua carteira está positiva!"
+                                : "Que pena, sua carteira está negativa."
+                        }
+                    </span>
+                    <span className="subtitle">
+                        {
+                            totalIncomes > totalExpenses
+                                ? "Considere investir o seu saldo!"
+                                : "Considere cortar alguns gastos!"
+                        }
+                    </span>
+                </div>
                 <div className="pieChartCard">
-                    
+                    <div className="info">
+                        <span className="title">Relação</span>
+                        <div className="balance">
+                            <div className="incomes-balance">{balanceCalc(totalIncomes, totalExpenses).incomesPercentage}</div>
+                            <span className="text">Entradas</span>
+                        </div>
+                        <div className="balance">
+                            <div className="expenses-balance">{balanceCalc(totalIncomes, totalExpenses).expensesPercentage}</div>
+                            <span className="text">Saídas</span>
+                        </div>
+                    </div>
+                        <PieChartComponent
+                            incomes={totalIncomes}
+                            expenses={totalExpenses}
+                        />
                 </div>
             </div>
             <div className="lineChartCard"></div>
