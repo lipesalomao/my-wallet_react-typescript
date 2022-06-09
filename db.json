@@ -59,16 +59,6 @@
       "value": 123,
       "description": "",
       "id": "1Eob2Z9"
-    },
-    {
-      "user_id": "ABC123",
-      "title": "Teste",
-      "type": "saída",
-      "frequency": "recorrente",
-      "date": "2022-06-08T01:33:12.483Z",
-      "value": 8000,
-      "description": "",
-      "id": "sXBeOAp"
     }
   ],
   "users": [

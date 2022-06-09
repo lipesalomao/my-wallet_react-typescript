@@ -37,11 +37,11 @@ async function handleLogout () {
                     <Link to="/new">Novo Registro</Link>
                 </div>
                 <div>
-                    <MdArrowDownward />
+                    <MdArrowUpward />
                     <Link to="/in">Entradas</Link>
                 </div>
                 <div>
-                    <MdArrowUpward />
+                    <MdArrowDownward />
                     <Link to="/out">Saídas</Link>
                 </div>
                 <div>

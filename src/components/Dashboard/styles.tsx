@@ -169,8 +169,46 @@ export const DashboardContainer = styled.div`
         display: flex;
         flex-direction: column;
         border-radius: 10px;
+        padding: 2rem;
+        gap: 1rem;
         min-height: 260px;
         background: ${(props) => props.theme.colors.secondary};
+
+        .info{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            color: ${({ theme }) => theme.text.primary};
+
+            .title{
+                font-size: 1.4rem;
+                font-weight: bold;
+            }
+
+            .legend{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                
+                .incomes, .expenses {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                }
+
+                .incomes-color, .expenses-color{
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 15%;
+                    background: ${({ theme }) => theme.colors.yellow};
+                }
+                .expenses-color{
+                    background: ${({ theme }) => theme.colors.warn};
+                }
+            }
+        }
     }
     .lastCardsContainer {
         display: flex;

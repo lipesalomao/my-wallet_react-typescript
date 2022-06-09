@@ -6,6 +6,9 @@ import CountUp from "react-countup";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { IUserModel } from "../../models/UserModel";
 import { PieChartComponent } from "../Charts/PieChart";
+import { LineChartComponent } from "../Charts/LineChart";
+
+const lineChartCard = document.querySelector(".lineChartCard");
 
 export function Dashboard() {
     const api = useApi();
@@ -21,8 +24,8 @@ export function Dashboard() {
 
     const balanceCalc = (incomes: number, expenses: number) => {
         const totalAmount = incomes + expenses;
-        const expensesPercentage = ((expenses / totalAmount) * 100).toFixed(2);
-        const incomesPercentage = ((incomes / totalAmount) * 100).toFixed(2);
+        const expensesPercentage = ((expenses / totalAmount) * 100).toFixed(1);
+        const incomesPercentage = ((incomes / totalAmount) * 100).toFixed(1);
 
         return {
             expensesPercentage,
@@ -181,39 +184,60 @@ export function Dashboard() {
             <div className="secondCardsContainer">
                 <div className="messageCard">
                     <span className="title">
-                        {
-                            totalIncomes > totalExpenses
-                                ? "Muito bem! Sua carteira está positiva!"
-                                : "Que pena, sua carteira está negativa."
-                        }
+                        {totalIncomes > totalExpenses
+                            ? "Muito bem! Sua carteira está positiva!"
+                            : "Que pena, sua carteira está negativa."}
                     </span>
                     <span className="subtitle">
-                        {
-                            totalIncomes > totalExpenses
-                                ? "Considere investir o seu saldo!"
-                                : "Considere cortar alguns gastos!"
-                        }
+                        {totalIncomes > totalExpenses
+                            ? "Considere investir o seu saldo!"
+                            : "Considere cortar alguns gastos!"}
                     </span>
                 </div>
                 <div className="pieChartCard">
                     <div className="info">
                         <span className="title">Relação</span>
                         <div className="balance">
-                            <div className="incomes-balance">{balanceCalc(totalIncomes, totalExpenses).incomesPercentage}</div>
+                            <div className="incomes-balance">
+                                {
+                                    `${balanceCalc(totalIncomes, totalExpenses)
+                                        .incomesPercentage}%`
+                                }
+                            </div>
                             <span className="text">Entradas</span>
                         </div>
                         <div className="balance">
-                            <div className="expenses-balance">{balanceCalc(totalIncomes, totalExpenses).expensesPercentage}</div>
+                            <div className="expenses-balance">
+                                {
+                                    `${balanceCalc(totalIncomes, totalExpenses)
+                                        .expensesPercentage}%`
+                                }
+                            </div>
                             <span className="text">Saídas</span>
                         </div>
                     </div>
-                        <PieChartComponent
-                            incomes={totalIncomes}
-                            expenses={totalExpenses}
-                        />
+                    <PieChartComponent
+                        incomes={totalIncomes}
+                        expenses={totalExpenses}
+                    />
                 </div>
             </div>
-            <div className="lineChartCard"></div>
+            <div className="lineChartCard">
+                <div className="info">
+                    <span className="title">Histórico de saldo</span>
+                    <div className="legend">
+                        <div className="incomes">
+                            <div className="incomes-color"></div>
+                            <span className="text">Entradas</span>
+                        </div>
+                        <div className="expenses">
+                            <div className="expenses-color"></div>
+                            <span className="text">Saídas</span>
+                        </div>
+                    </div>
+                </div>
+                <LineChartComponent />
+            </div>
             <div className="lastCardsContainer">
                 <div className="columnIncomesChartCard"></div>
                 <div className="columnWithdrawsChartCard"></div>

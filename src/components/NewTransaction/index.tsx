@@ -76,13 +76,6 @@ export function NewTransaction() {
             navigate("/out");
         }
     }
-    async function teste(){
-        auth.signin("felipe@gmail.com", "123");
-        //console.warn(auth.user!.uid);
-
-        const res = await api.signin("felipe@gmail.com", "123")
-        //console.warn("teste", res);
-    }
 
     return (
         <NewTransactionContainer>
@@ -183,7 +176,7 @@ export function NewTransaction() {
                         >
                             {location.id ? "Atualizar" : "Cadastrar"}
                         </button>
-                        <button onClick={e => teste()}>teste</button>
+                       
                     </div>
                 </div>
             </div>
