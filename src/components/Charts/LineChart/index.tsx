@@ -1,58 +1,52 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { ThemeContext } from "styled-components";
+import { ITransactionModel } from "../../../models/TransactionModel";
 
-export function LineChartComponent() {
-    const data = [
-        {
-            name: "Jan",
-            uv: 4000,
-            pv: 2400,
-            amt: 2400,
-        },
-        {
-            name: "Fev",
-            uv: 3000,
-            pv: 1398,
-            amt: 2210,
-        },
-        {
-            name: "Mar",
-            uv: 2000,
-            pv: 9800,
-            amt: 2290,
-        },
-        {
-            name: "Abr",
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-        },
-        {
-            name: "Mai",
-            uv: 1890,
-            pv: 4800,
-            amt: 2181,
-        },
-        {
-            name: "Jun",
-            uv: 2390,
-            pv: 3800,
-            amt: 2500,
-        },
-        {
-            name: "Jul",
-            uv: 3490,
-            pv: 4300,
-            amt: 2100,
-        },
-    ];
+interface ILineChart {
+    data: ITransactionModel[];
+}
 
+
+export function LineChartComponent(props: ILineChart) {
     const { colors, text } = useContext(ThemeContext);
+    
+
+/* const handleMonths = (filter: boolean) => {
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDay();
+
+    let data: Object[] = [];
+
+        props.data.reduce((acc: any, curr: any) => {
+
+            for (let i = 6; i > 0; i--) { 
+                if(new Date(curr.date).getMonth() === i){
+                    data.push({
+                        month: months(new Date(curr.date).getMonth()),
+                        entradas: curr.value,
+                        saidas: curr.value,
+                        
+                    });
+                }
+            }
+            
+            console.warn(data);
+            return acc + curr;
+        })
+    
+
+    for (let i = currentDay; i > 1; i--) {
+        return i;
+    }
+    
+    return data;
+}; */
+        
     return (
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
-                data={data}
+                data={props.data}
                 margin={{
                     top: 5,
                     right: 30,
@@ -61,20 +55,20 @@ export function LineChartComponent() {
                 }}
             >
                 <XAxis
-                    dataKey="name"
+                    dataKey="month"
                     tick={{ fontWeight: "bold", fill: `${text.primary}` }}
                 />
                 <Tooltip />
                 <Line
                     type="monotone"
-                    dataKey="pv"
+                    dataKey="entradas"
                     stroke={colors.warn}
                     strokeWidth={4}
                     activeDot={{ r: 5 }}
                 />
                 <Line
                     type="monotone"
-                    dataKey="uv"
+                    dataKey="saidas"
                     stroke={text.secondary}
                     strokeWidth={4}
                 />

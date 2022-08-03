@@ -7,7 +7,7 @@ import { ListContainer } from "./styles";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 export function List(props: any) {
-    const actualYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
     const api = useApi();
     const auth: any = useContext(AuthContext);
     const { text } = useContext(ThemeContext);
@@ -76,11 +76,11 @@ export function List(props: any) {
                         value={year}
                         onChange={(e) => setYear(Number(e.target.value))}
                     >
-                        <option value={actualYear}>{actualYear}</option>
-                        <option value={actualYear - 1}>{actualYear - 1}</option>
-                        <option value={actualYear - 2}>{actualYear - 2}</option>
-                        <option value={actualYear - 3}>{actualYear - 3}</option>
-                        <option value={actualYear - 4}>{actualYear - 4}</option>
+                        <option value={currentYear}>{currentYear}</option>
+                        <option value={currentYear - 1}>{currentYear - 1}</option>
+                        <option value={currentYear - 2}>{currentYear - 2}</option>
+                        <option value={currentYear - 3}>{currentYear - 3}</option>
+                        <option value={currentYear - 4}>{currentYear - 4}</option>
                     </select>
 
                     <select

@@ -81,7 +81,9 @@ export function NewTransaction() {
         <NewTransactionContainer>
             <div className="headerContainer">
                 <div>
-                    <h1 className="title">Cadastrar</h1>
+                    <h1 className="title">
+                        {location.id ? "Atualizar" : "Cadastrar"}
+                    </h1>
                     <div className="titleUnderline"></div>
                 </div>
             </div>
@@ -138,7 +140,6 @@ export function NewTransaction() {
                     <div className="value">
                         <span>Valor</span>
                         <input
-                            
                             type="number"
                             name="value"
                             value={value}
@@ -165,9 +166,7 @@ export function NewTransaction() {
                         <div></div>
                     )}
                     <div>
-                        <button onClick={() => navigate("/")}>
-                            Voltar
-                        </button>
+                        <button onClick={() => navigate("/")}>Voltar</button>
                         <button
                             disabled={!title || !date || !value}
                             onClick={() => {
@@ -176,7 +175,6 @@ export function NewTransaction() {
                         >
                             {location.id ? "Atualizar" : "Cadastrar"}
                         </button>
-                       
                     </div>
                 </div>
             </div>

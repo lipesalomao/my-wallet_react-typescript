@@ -21,9 +21,9 @@ export const useApi = () => ({
     },
 
     getAllTransactions: async (
-        year: number,
-        month: number,
-        user_id: string
+        user_id: string,
+        year: any,
+        month: any
     ) => {
         const response = await axios.get(
             `http://localhost:3333/transactions?user_id=${user_id}`

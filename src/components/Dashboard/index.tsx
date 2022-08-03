@@ -7,14 +7,33 @@ import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { IUserModel } from "../../models/UserModel";
 import { PieChartComponent } from "../Charts/PieChart";
 import { LineChartComponent } from "../Charts/LineChart";
+import { AiOutlineClear } from "react-icons/ai";
 
-const lineChartCard = document.querySelector(".lineChartCard");
+
+const months = (key: number) => {
+    const monthEquivalence: any = {
+        1: "Jan",
+        2: "Fev",
+        3: "Mar",
+        4: "Abr",
+        5: "Mai",
+        6: "Jun",
+        7: "Jul",
+        8: "Ago",
+        9: "Set",
+        10: "Out",
+        11: "Nov",
+        12: "Dez",
+    };
+    return monthEquivalence[key];
+};
 
 export function Dashboard() {
     const api = useApi();
-    const actualYear = new Date().getFullYear();
-    const [year, setYear] = useState<number>(new Date().getFullYear());
-    const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
+    const currentYear = new Date().getFullYear();
+    const [data, setData] = useState<any>([]);
+    const [year, setYear] = useState<number | string>();
+    const [month, setMonth] = useState<number | string>();
     const [totalIncomes, setTotalIncomes] = useState<number>(0);
     const [totalExpenses, setTotalExpenses] = useState<number>(0);
     const [lastIncomeDate, setLastIncomeDate] = useState<string>("");
@@ -29,18 +48,32 @@ export function Dashboard() {
 
         return {
             expensesPercentage,
-            incomesPercentage
+            incomesPercentage,
         };
-    }
+    };
 
     async function getFullData() {
         await api
-            .getAllTransactions(year, month, auth.user.uid)
+            .getAllTransactions(auth.user.uid, year, month)
             .then((res: ITransactionModel[]) => {
                 handleData(res);
+                handleLineChartData(res, month);
             });
     }
-
+    function handleLineChartData(data: ITransactionModel[], month?: number | string) {
+        setData([
+            {
+                month: "Jan",
+                entradas: 1234,
+                saidas: 1234,
+            },
+            {
+                month: "Fev",
+                entradas: 3234,
+                saidas: 2234,
+            },
+        ]);
+    }
     function handleData(data: ITransactionModel[]) {
         let incomes: any = [];
         let expenses: any = [];
@@ -84,20 +117,24 @@ export function Dashboard() {
                 </div>
                 <div className="filterContainer">
                     <select
+                        placeholder="Ano"
                         value={year}
                         onChange={(e) => setYear(Number(e.target.value))}
                     >
-                        <option value={actualYear}>{actualYear}</option>
-                        <option value={actualYear - 1}>{actualYear - 1}</option>
-                        <option value={actualYear - 2}>{actualYear - 2}</option>
-                        <option value={actualYear - 3}>{actualYear - 3}</option>
-                        <option value={actualYear - 4}>{actualYear - 4}</option>
+                        <option value={undefined}></option>
+                        <option value={currentYear}>{currentYear}</option>
+                        <option value={currentYear - 1}>{currentYear - 1}</option>
+                        <option value={currentYear - 2}>{currentYear - 2}</option>
+                        <option value={currentYear - 3}>{currentYear - 3}</option>
+                        <option value={currentYear - 4}>{currentYear - 4}</option>
                     </select>
 
                     <select
+                        placeholder="Mês"
                         value={month}
                         onChange={(e) => setMonth(Number(e.target.value))}
                     >
+                        <option value={undefined}></option>
                         <option value={1}>Janeiro</option>
                         <option value={2}>Fevereiro</option>
                         <option value={3}>Março</option>
@@ -111,6 +148,16 @@ export function Dashboard() {
                         <option value={11}>Novembro</option>
                         <option value={12}>Dezembro</option>
                     </select>
+
+                    <button
+                        className="clear"
+                        disabled={!year && !month}
+                        onClick={(e) => {
+                            setMonth(''), setYear('');
+                        }}
+                    >
+                        <AiOutlineClear />
+                    </button>
                 </div>
             </div>
             <div className="firstCardsContainer">
@@ -199,19 +246,19 @@ export function Dashboard() {
                         <span className="title">Relação</span>
                         <div className="balance">
                             <div className="incomes-balance">
-                                {
-                                    `${balanceCalc(totalIncomes, totalExpenses)
-                                        .incomesPercentage}%`
-                                }
+                                {`${
+                                    balanceCalc(totalIncomes, totalExpenses)
+                                        .incomesPercentage
+                                }%`}
                             </div>
                             <span className="text">Entradas</span>
                         </div>
                         <div className="balance">
                             <div className="expenses-balance">
-                                {
-                                    `${balanceCalc(totalIncomes, totalExpenses)
-                                        .expensesPercentage}%`
-                                }
+                                {`${
+                                    balanceCalc(totalIncomes, totalExpenses)
+                                        .expensesPercentage
+                                }%`}
                             </div>
                             <span className="text">Saídas</span>
                         </div>
@@ -236,7 +283,7 @@ export function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <LineChartComponent />
+                <LineChartComponent data={data} />
             </div>
             <div className="lastCardsContainer">
                 <div className="columnIncomesChartCard"></div>
